@@ -1,31 +1,29 @@
-variable "name" {
+variable "workload_name" {
   type        = string
   default     = "app"
-  description = "name of the app"
+  description = "The name of the workload to deploy."
 }
 
-variable "env" {
+variable "environment" {
   type        = string
   default     = "prod"
-  description = "environment"
+  description = "The environment the workload will be deployed into. E.g., dev, test, prod."
 }
 
-variable "loc" {
+variable "location" {
   type        = string
   default     = "uksouth"
-  description = "location for resources"
+  description = "The Azure region to deploy resources into."
 }
 
 variable "admin_password_windows" {
   type        = string
   sensitive   = true
-  default     = "P@ssw0rd123!SomethingRandom"
-  description = "the password for windows admin"
+  description = "The password for Windows admin VM."
 }
 
 variable "admin_password_linux" {
   type        = string
   sensitive   = true
-  default     = "P@ssw0rd456!AnotherRandom"
-  description = "the password for linux admin"
+  description = "The password for Linux admin VM."
 }

@@ -1,7 +1,7 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "windows" {
-  name                        = "kv${var.name}${var.env}win"
+  name                        = "kv${var.workload_name}${var.environment}win"
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true
@@ -31,7 +31,7 @@ resource "azurerm_key_vault" "windows" {
 }
 
 resource "azurerm_key_vault" "linux" {
-  name                        = "kv${var.name}${var.env}linux"
+  name                        = "kv${var.workload_name}${var.environment}linux"
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true

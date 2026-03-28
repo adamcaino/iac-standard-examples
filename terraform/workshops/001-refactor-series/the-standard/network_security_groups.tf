@@ -1,6 +1,6 @@
 # Windows NSG
 resource "azurerm_network_security_group" "windows" {
-  name                = "nsg-${var.name}-windows"
+  name                = "nsg-${var.workload_name}-windows"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -72,7 +72,7 @@ resource "azurerm_subnet_network_security_group_association" "windows" {
 
 # Linux NSG
 resource "azurerm_network_security_group" "linux" {
-  name                = "nsg-${var.name}-linux"
+  name                = "nsg-${var.workload_name}-linux"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 

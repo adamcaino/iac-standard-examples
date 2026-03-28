@@ -1,5 +1,5 @@
 resource "azurerm_network_interface" "windows" {
-  name                = "nic-win-${var.name}"
+  name                = "nic-win-${var.workload_name}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -11,7 +11,7 @@ resource "azurerm_network_interface" "windows" {
 }
 
 resource "azurerm_windows_virtual_machine" "windows" {
-  name                = "vm-win-${var.name}"
+  name                = "vm-win-${var.workload_name}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   size                = "Standard_B2s"
