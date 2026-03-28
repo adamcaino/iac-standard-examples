@@ -1,26 +1,26 @@
-resource "azurerm_network_interface" "windows_nic_1" {
+resource "azurerm_network_interface" "windows" {
   name                = "nic-win-${var.name}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
   ip_configuration {
     name                          = "ip_config_windows"
-    subnet_id                     = azurerm_subnet.subnet_windows.id
+    subnet_id                     = azurerm_subnet.windows.id
     private_ip_address_allocation = "Dynamic"
   }
 }
 
-resource "azurerm_windows_virtual_machine" "windows_machine_config_prod_abc" {
+resource "azurerm_windows_virtual_machine" "windows" {
   name                = "vm-win-${var.name}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   size                = "Standard_B2s"
 
   admin_username = "localadmin"
-  admin_password = var.admin_password_windows
+  admin_password = azurerm_key_vault_secret.windows_admin.value
 
   network_interface_ids = [
-    azurerm_network_interface.windows_nic_1.id,
+    azurerm_network_interface.windows.id,
   ]
 
   os_disk {

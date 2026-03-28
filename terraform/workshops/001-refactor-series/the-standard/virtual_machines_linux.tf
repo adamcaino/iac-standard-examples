@@ -1,16 +1,16 @@
-resource "azurerm_network_interface" "linux_nic_prod" {
+resource "azurerm_network_interface" "linux" {
   name                = "nic-lin-${var.name}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
   ip_configuration {
     name                          = "ip_config_linux"
-    subnet_id                     = azurerm_subnet.subnet_linux.id
+    subnet_id                     = azurerm_subnet.linux.id
     private_ip_address_allocation = "Dynamic"
   }
 }
 
-resource "azurerm_linux_virtual_machine" "linux_machine_uat_prod_environment_server" {
+resource "azurerm_linux_virtual_machine" "linux" {
   name                = "vm-lin-${var.name}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -19,10 +19,10 @@ resource "azurerm_linux_virtual_machine" "linux_machine_uat_prod_environment_ser
   admin_username = "azureuser"
 
   network_interface_ids = [
-    azurerm_network_interface.linux_nic_prod.id,
+    azurerm_network_interface.linux.id,
   ]
 
-  admin_password                  = var.admin_password_linux
+  admin_password                  = azurerm_key_vault_secret.linux_admin.value
   disable_password_authentication = false
 
   os_disk {

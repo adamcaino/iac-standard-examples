@@ -1,4 +1,4 @@
-resource "azurerm_virtual_network" "vnet_main_network_prod_uat" {
+resource "azurerm_virtual_network" "workload" {
   name                = "vn-${var.name}-net"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg.location
